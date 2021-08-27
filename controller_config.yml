@@ -1,0 +1,60 @@
+---
+- name: Playbook to configure a Tower cluster
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  collections:
+    - ansible.tower
+    - redhat_cop.controller_configuration
+
+  vars:
+    absent_present: "present"
+
+  environment:
+    CONTROLLER_VERIFY_SSL: False
+
+  pre_tasks:
+    - name: Include Vars
+      include_vars: "vars/controller_vars.yml"
+
+  tasks:
+    - name: Include task for managing credential types
+      include_tasks: tasks/manage_credential_types.yml
+
+    - name: Include task for managing organizations
+      include_tasks: tasks/manage_organizations.yml
+    
+    - name: Include task for managing users
+      include_tasks: tasks/manage_users.yml
+
+    - name: Include task for managing credentials
+      include_tasks: tasks/manage_credentials.yml
+
+    # Add Orgs a second time to associate the Galaxy / Automation Hub credentials with the Org for project sync
+    - name: Include task for managing organizations
+      include_tasks: tasks/manage_organizations.yml
+      
+    - name: Include task for managing projects
+      include_tasks: tasks/manage_projects.yml
+    
+    - name: Include task for managing labels
+      include_tasks: tasks/manage_labels.yml
+    
+    - name: Include task for managing inventories
+      include_tasks: tasks/manage_inventories.yml
+
+    - name: Include task for managing hosts
+      include_tasks: tasks/manage_hosts.yml
+
+    - name: Include task for managing groups
+      include_tasks: tasks/manage_groups.yml
+
+    - name: Include task for managing job templates
+      include_tasks: tasks/manage_job_templates.yml
+
+    - name: Include task for managing workflow templates
+      include_tasks: tasks/manage_workflow_templates.yml
+    
+    - name: Include task for managing schedules
+      include_tasks: tasks/manage_schedules.yml
+...

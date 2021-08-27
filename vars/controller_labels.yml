@@ -1,0 +1,6 @@
+---
+tower_labels:
+  - name: ""
+    organization: ""
+    state: "{{ absent_present }}"
+...

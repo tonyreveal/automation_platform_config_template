@@ -1,0 +1,6 @@
+---
+tower_inventories:
+  - name: ""
+    state: "{{ absent_present }}"
+    organization: ""
+...

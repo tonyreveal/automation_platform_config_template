@@ -1,0 +1,5 @@
+---
+tower_organizations:
+  - name: ""
+    state: "{{ absent_present }}"
+...

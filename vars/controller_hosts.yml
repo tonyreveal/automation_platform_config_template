@@ -1,0 +1,26 @@
+---
+tower_hosts:
+  - name: ""
+    new_name: ""
+    inventory: "{{ which_inventory }}"
+    enabled: "yes"
+    state: "{{ absent_present }}"
+
+  - name: ""
+    new_name: ""
+    inventory: "{{ which_inventory }}"
+    enabled: "yes"
+    state: "{{ absent_present }}"
+
+  - name: ""
+    new_name: ""
+    inventory: "{{ which_inventory }}"
+    enabled: "yes"
+    state: "{{ absent_present }}"
+
+  - name: ""
+    new_name: ""
+    inventory: "{{ which_inventory }}"
+    enabled: "yes"
+    state: "{{ absent_present }}"
+...
