@@ -1,5 +1,8 @@
+# Refer to https://github.com/redhat-cop/tower_configuration/tree/devel/roles/inventories
+# for documentation and additional parameter information
+
 ---
-tower_inventories:
+controller_inventories:
   - name: ""
     state: "{{ absent_present }}"
     organization: ""

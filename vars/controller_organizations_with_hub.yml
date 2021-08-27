@@ -1,5 +1,8 @@
+# Refer to https://github.com/redhat-cop/tower_configuration/tree/devel/roles/organizations
+# for documentation and additional parameter information
+
 ---
-tower_organizations:
+controller_organizations:
   - name: ""
     galaxy_credentials:
       - "RH Automation Hub {{ which_org}}"

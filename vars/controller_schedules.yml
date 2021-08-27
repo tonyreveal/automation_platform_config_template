@@ -1,5 +1,8 @@
+# Refer to https://github.com/redhat-cop/tower_configuration/tree/devel/roles/schedules
+# for documentation and additional parameter information
+
 ---
-tower_schedules:
+controller_schedules:
   - name: ""
     description: ""
     enabled: no

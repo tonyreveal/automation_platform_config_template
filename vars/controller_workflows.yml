@@ -1,5 +1,8 @@
+# Refer to https://github.com/redhat-cop/tower_configuration/tree/devel/roles/workflow_job_templates
+# for documentation and additional parameter information
+
 ---
-tower_workflows:
+controller_workflows:
   - name: ""
     organization: ""
     state: ""

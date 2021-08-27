@@ -1,3 +1,6 @@
+# Refer to https://github.com/redhat-cop/tower_configuration/tree/devel/roles/groups
+# for documentation and additional parameter information
+
 ---
 controller_groups:
   - name: ""

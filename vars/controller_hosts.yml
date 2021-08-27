@@ -1,5 +1,8 @@
+# Refer to https://github.com/redhat-cop/tower_configuration/tree/devel/roles/hosts
+# for documentation and additional parameter information
+
 ---
-tower_hosts:
+controller_hosts:
   - name: ""
     new_name: ""
     inventory: "{{ which_inventory }}"

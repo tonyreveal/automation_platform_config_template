@@ -1,5 +1,8 @@
+# Refer to https://github.com/redhat-cop/tower_configuration/tree/devel/roles/labels
+# for documentation and additional parameter information
+
 ---
-tower_labels:
+controller_labels:
   - name: ""
     organization: ""
     state: "{{ absent_present }}"

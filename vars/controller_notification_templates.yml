@@ -1,5 +1,8 @@
+# Refer to https://github.com/redhat-cop/tower_configuration/tree/devel/roles/notification_templates
+# for documentation and additional parameter information
+
 ---
-tower_notification_templates:
+controller_notification_templates:
   - name: ""
     new_name: ""
     description: ""
