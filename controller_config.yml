@@ -18,6 +18,9 @@
       include_vars: "vars/controller_vars.yml"
 
   tasks:
+    - name: Include task for managing LDAP settings
+      include_tasks: tasks/manage_controller_settings.yml
+
     - name: Include task for managing credential types
       include_tasks: tasks/manage_credential_types.yml
 
