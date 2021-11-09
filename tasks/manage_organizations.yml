@@ -7,7 +7,7 @@
     return_content: yes
     url:  "https://{{ controller_hostname }}/api/v2/organizations/"
     user: "{{ controller_username }}"
-    validate_certs: no
+    validate_certs: "{{ controller_validate_certs }}"
   register: existing_organizations
 
 - name: Set fact when organization is present
