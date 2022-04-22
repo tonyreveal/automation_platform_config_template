@@ -12,7 +12,7 @@ controller_notification_templates:
       - host: ""
         port: 
         username: ""
-        password: "{{ lookup('file','NotifyOps_Pass_Vault.yml') }}"
+        password: ""
         sender: ""
         recipients:
           - 
