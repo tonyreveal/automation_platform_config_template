@@ -17,7 +17,7 @@ controller_notification_templates:
         recipients:
           - 
         timeout: 30
-        use_tls: yes
-        use_ssl: no
+        use_tls: true
+        use_ssl: false
     state: "{{ absent_present }}"
 ...
