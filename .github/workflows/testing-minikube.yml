@@ -16,10 +16,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          path: controller_configuration
+          path: controller_config_template
 
       - name: "Install dependencies"
-        run: pip install -r controller_configuration/.github/requirements.txt
+        run: pip install -r controller_config_template/.github/requirements.txt
 
       - name: Setup Minikube
         uses: manusa/actions-setup-minikube@v2.4.2
@@ -40,7 +40,7 @@ jobs:
           minikube addons enable ingress
           alias kubectl="minikube kubectl --"
           make deploy NAMESPACE=default
-          kubectl apply -f controller_configuration/.github/workflow-config/kube/awx_def.yml
+          kubectl apply -f controller_config_template/.github/workflow-config/kube/awx_def.yml
       - name: Wait / Sleep
         uses: jakejarvis/wait-action@v0.1.0
         with:
@@ -75,7 +75,7 @@ jobs:
 
       - name: Check service password
         run: echo "Service password is ${{ steps.service-password.outputs.SERVICEPASSWORD }}"
-      
+
       - name: "Perform playbook tests"
         run: #ansible-playbook examples/configure_controller.yml -e controller_hostname=${{ steps.service-url.outputs.SERVICEURL }}
 
