@@ -24,7 +24,7 @@ repos:
         always_run: true
         entry: >-
           ansible-lint -c .github/workflow-config/.ansiblelint.yml
-          --exclude=.github/
+          --exclude=.github/ --exclude=collections/
   - repo: https://github.com/ambv/black
     rev: 22.3.0
     hooks:
