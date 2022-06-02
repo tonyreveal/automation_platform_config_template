@@ -20,11 +20,11 @@ jobs:
         pip install --upgrade ansible
         ansible-galaxy collection install -f -r .github/collections/requirements.yml
         ls -al .github
-        ls -al collections
-        ls -al collections/ansible_collections
-        ls -al collections/ansible_collections/awx/awx/
-        ls -al collections/ansible_collections/awx/awx/plugins
-        sudo cp -a collections/ansible_collections/awx/awx/plugins/. plugins/
+        ls -al .github/collections
+        ls -al .github/collections/ansible_collections
+        ls -al .github/collections/ansible_collections/awx/awx/
+        ls -al .githubcollections/ansible_collections/awx/awx/plugins
+        sudo cp -a .github/collections/ansible_collections/awx/awx/plugins/ plugins/
         ansible-config view -vvv
     - name: Hack pre-commit
       # https://github.com/pre-commit/action/issues/44
