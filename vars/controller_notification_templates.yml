@@ -10,12 +10,12 @@ controller_notification_templates:
     notification_type: "email"
     notification_configuration: 
       - host: ""
-        port: 
+        port: ""
         username: ""
         password: ""
         sender: ""
         recipients:
-          - 
+          - ""
         timeout: 30
         use_tls: true
         use_ssl: false

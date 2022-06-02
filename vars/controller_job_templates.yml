@@ -22,7 +22,7 @@ controller_templates:
     project: ""
     playbook: ""
     labels: ""
-    credentials: 
+    credentials:
       - ""
     organization: ""
     state: "{{ absent_present }}"
