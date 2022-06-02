@@ -108,9 +108,9 @@ Variables
     controller_organizations
 
         Dictionary of organizations to create.  One example exists that will need to be filled in.  You can also copy / paste the example for additional oranizaitons.
-    
-    You must associate Galaxy / Automation Hub credentials with an Organization before you sync projects.  Otherwise the project sync will fail. This particular vars file has the organization defined with the Galaxy / Automation Hub credentials. 
-    
+
+    You must associate Galaxy / Automation Hub credentials with an Organization before you sync projects.  Otherwise the project sync will fail. This particular vars file has the organization defined with the Galaxy / Automation Hub credentials.
+
     There is a check in the `tasks/manage_controller_organizations.yml` which checks to see if the organization is already defined.  If it is not defined then it creates the organization.
 
     However, you cannot associate a Galaxy / Private Automation Hub credential to an organization you are defining for the first time because those credentials for that organization have not been created yet.  So the organization is created, then credentials are added to the organization, and then the organization is updated to associate the Galaxy / Automation Hub credentials.
@@ -162,8 +162,8 @@ Variables
     controller_vars
 
         If using ansible-playbook, populate `controller_vars` your Tower or Controller hostname (or IP adress), username, and password.  The variables are used for your connection to Tower / Controller to create the objects you define in these vars files.
-        
-        If you are going to create a Job Template in Tower / Controller to run the `controller_config.yml` playbook then do not populate this file and instead use either a Survey or extra_vars with your job tmeplate..
+
+        If you are going to create a Job Template in Tower / Controller to run the `controller_config.yml` playbook then do not populate this file and instead use either a Survey or extra_vars with your job tmeplate.
 
 `vars/controller_workflows.yml`:
 
@@ -189,8 +189,6 @@ From the command line to define all objects:
     or just to create new job templates:
 
     ansible-playbook controller_config.yaml --tags jobtemplates
-
-    Review the 
 
 License
 -------
