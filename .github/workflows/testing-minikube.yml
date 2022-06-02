@@ -77,5 +77,5 @@ jobs:
         run: echo "Service password is ${{ steps.service-password.outputs.SERVICEPASSWORD }}"
 
       - name: "Perform playbook tests"
-        run: ansible-playbook examples/controller_config.yml -e controller_hostname=${{ steps.service-url.outputs.SERVICEURL }}
+        run: ansible-playbook controller_config.yml -e controller_hostname=${{ steps.service-url.outputs.SERVICEURL }}
 ...
