@@ -3,12 +3,12 @@ Controller Configuration
 
 A single playbook and multiple task and vars files which can be used to define your Tower or Controller configuration as code.  Update the vars files to define your objects and run the playbook to deploy your changes to your Tower / AAP 2.1 cluster(s).
 
-If executed with the `all` tag then the playbook will create all ojbects defined in all vars files in the appropriate order.
+If executed with the `alltags` tag then the playbook will create all ojbects defined in all vars files in the appropriate order.
 
 Use of some tags may require that you include other tags; for example if adding a project but you haven't already added the correct SCM credential.
 
 Available tags:
-- all
+- alltags
 - settings
 - credtypes
 - orgs
@@ -19,11 +19,15 @@ Available tags:
 - labels
 - inventory
 - inventorysources
+- instancegroups
 - hosts
 - groups
+- ees
+- notifications
 - jobtemplates
 - workflows
 - schedules
+- roles
 
 Requirements
 ------------
@@ -171,6 +175,30 @@ Variables
 
         Dictionary of workflows to create.  One example exists that will need to be filled in.  You can also copy / paste the example for additional workflows.
 
+`vars/controller_execution_environments.yml`:
+
+    controller_execution_environments
+
+        Dictionary of exection environments to define.  One example exists that will need to be filled in.  You can also copy / paste the example for additional execution environments.
+
+`vars/controller_notification_templates.yml`:
+
+    controller_notification_templates
+
+        Dictionary of notification templates to create.  One example exists that will need to be filled in.  You can also copy / paste the example for additional notification templates.
+
+`vars/controller_roles.yml`:
+
+    controller_roles
+
+        Dictionary of roles to define.  One example exists that will need to be filled in.  You can also copy / paste the example for additional roles.
+
+`vars/controller_instance_groups.yml`:
+
+    controller_instance_groups
+
+        Dictionary of instance groups to create.  One example exists that will need to be filled in.  You can also copy / paste the example for additional instance groups.
+
 Dependencies
 ------------
 
@@ -184,7 +212,7 @@ You can run this playbook from ansible cli or as a Job Template in Tower / Contr
 
 From the command line to define all objects:
 
-    ansible-playbook controller_config.yml --tags all
+    ansible-playbook controller_config.yml --tags alltags
 
     or just to create new job templates:
 
