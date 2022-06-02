@@ -1,11 +1,12 @@
 ---
-- name: Include groups vars
+- name: "Include groups vars"
   include_vars: ../vars/controller_groups.yml
   tags:
     - groups
     - alltags
 
-- import_role:
+- name: "Import role to create host groups"
+  import_role:
     name: redhat_cop.controller_configuration.groups
   tags:
     - groups

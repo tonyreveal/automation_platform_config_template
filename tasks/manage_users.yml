@@ -1,11 +1,12 @@
 ---
-- name: Include users vars
+- name: "Include users vars"
   include_vars: ../vars/controller_users.yml
   tags:
     - users
     - alltags
 
-- import_role:
+- name: "Import role to create users"
+  import_role:
     name: redhat_cop.controller_configuration.users
   tags:
     - users

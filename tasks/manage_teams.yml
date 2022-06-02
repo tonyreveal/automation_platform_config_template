@@ -1,11 +1,12 @@
 ---
-- name: Include teams vars
+- name: "Include teams vars"
   include_vars: ../vars/controller_teams.yml
   tags:
     - teams
     - alltags
 
-- import_role:
+- name: "Import role to create teams"
+  import_role:
     name: redhat_cop.controller_configuration.teams
   tags:
     - teams

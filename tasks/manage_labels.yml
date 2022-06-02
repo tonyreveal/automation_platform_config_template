@@ -1,11 +1,12 @@
 ---
-- name: Include labels vars
+- name: "Include labels vars"
   include_vars: ../vars/controller_labels.yml
   tags:
     - labels
     - alltags
 
-- import_role:
+- name: "Import role to create labels"
+  import_role:
     name: redhat_cop.controller_configuration.labels
   tags:
     - labels

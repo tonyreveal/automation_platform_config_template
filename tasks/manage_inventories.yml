@@ -1,11 +1,12 @@
 ---
-- name: Include inventories vars
+- name: "Include inventories vars"
   include_vars: ../vars/controller_inventories.yml
   tags:
     - inventory
     - alltags
 
-- import_role:
+- name: "Import role to create inventories"
+  import_role:
     name: redhat_cop.controller_configuration.inventories
   tags:
     - inventory

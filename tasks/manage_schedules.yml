@@ -1,11 +1,12 @@
 ---
-- name: Include schedules vars
+- name: "Include schedules vars"
   include_vars: ../vars/controller_schedules.yml
   tags:
     - schedules
     - alltags
 
-- import_role:
+- name: "Import role to create schedules"
+  import_role:
     name: redhat_cop.controller_configuration.schedules
   tags:
     - schedules
