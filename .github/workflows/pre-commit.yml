@@ -18,13 +18,8 @@ jobs:
         sudo apt install software-properties-common
         sudo apt-add-repository --yes --update ppa:ansible/ansible
         pip install --upgrade ansible
-        ansible-galaxy collection install -f -r .github/collections/requirements.yml
-        ls -al .github
-        ls -al .github/collections
-        ls -al .github/collections/ansible_collections
-        ls -al .github/collections/ansible_collections/awx/awx/
-        ls -al .githubcollections/ansible_collections/awx/awx/plugins
-        sudo cp -a .github/collections/ansible_collections/awx/awx/plugins/ plugins/
+        ansible-galaxy collection install -f -r .github/collections/requirements.yml -p collections/
+        sudo cp -a collections/ansible_collections/awx/awx/plugins/ plugins/
         ansible-config view -vvv
     - name: Hack pre-commit
       # https://github.com/pre-commit/action/issues/44
