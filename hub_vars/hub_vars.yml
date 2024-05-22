@@ -2,8 +2,9 @@
 # then this file should be vaulted before committing to your repository
 
 ---
-controller_hostname: ''
-controller_password: ''
-controller_username: ''
-controller_validate_certs: false
+ah_host: ''
+ah_username: ''
+ah_password: ''
+ah_path_prefix: ''
+validate_certs: false
 ...

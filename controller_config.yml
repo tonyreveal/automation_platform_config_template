@@ -1,5 +1,5 @@
 ---
-- name: Playbook to configure a Controller cluster
+- name: Playbook to configure a Ansible Automation Platform 2.x cluster
   hosts: localhost
   connection: local
   gather_facts: false
