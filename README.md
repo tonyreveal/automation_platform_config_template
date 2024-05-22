@@ -1,40 +1,14 @@
 Controller Configuration
 =========
 
-A single playbook and multiple task and vars files which can be used to define your Tower or Controller configuration as code.  Update the vars files to define your objects and run the playbook to deploy your changes to your Tower / AAP 2.1 cluster(s).
-
-If executed with the `alltags` tag then the playbook will create all ojbects defined in all vars files in the appropriate order.
-
-Use of some tags may require that you include other tags; for example if adding a project but you haven't already added the correct SCM credential.
-
-Available tags:
-- alltags
-- settings
-- credtypes
-- orgs
-- users
-- teams
-- credentials
-- projects
-- labels
-- inventory
-- inventorysources
-- instancegroups
-- hosts
-- groups
-- ees
-- notifications
-- jobtemplates
-- workflows
-- schedules
-- roles
+A single playbook  and multiple vars files which can be used to define your Automation Platform configuration as code.  Update the vars files to define your objects and run the playbook to deploy your changes to your AAP 2.x cluster(s).
 
 Requirements
 ------------
 
-This content utilizes the controller_configuration collection and the awx.awx or ansible.tower or ansible.controller collections.  You will need connectivity to a Private Automation Hub server which has synchronized these collections or to the internet so that the collections can be installed.
+This content utilizes the infra.controller_configuration collection and the ansible.controller collections.  You will need connectivity to a Private Automation Hub server which has synchronized these collections or to the internet so that the collections can be installed.
 
-You will also need Tower or Controller credentials with sufficient permissions to create the objects you define as code.  This will need to be a local account within the cluster and not an externally (such as ldap) authenticated account.
+You will also need Automation Platform credentials with sufficient permissions to create the objects you define as code.  Unless an Automation Platform system admin has enabled the setting `Allow External Users to Create OAuth2 Tokens` you will need to use a local account in the cluster and not an externally (such as ldap) authenticated account.
 
 Variables
 --------------
@@ -47,11 +21,11 @@ Variables
 
     which_org
 
-        You can update `which_org` to specify your org within the cluster and just create all objects in a single organization.  If you do not wish to use `which_org` then you will have to hard code the organization for each individual object replacing the variable `"{{ which_org }}"` with the organization name.
+        You can pass `which_org` as an extra_var when you run the playbook, or you can update `which_org` in the playbook to specify which organization within the cluster and create all objects in a single organization.  If you do not wish to use `which_org` then you will have to hard code the organization for each individual object replacing the variable `"{{ which_org }}"` with the organization name.
 
     CONTROLLER_VERIFY_SSL
 
-        CONTROLLER_VERIFY_SSL it is recommended not to modify this variable.  By default Tower / AAP 2.1 is installed with a self-signed certificate.  If you do not replace the certificate then you will receive certificate errors which prevent creating your objects.
+        It is recommended not to modify this variable.  By default AAP 2.x is installed with a self-signed certificate.  If you do not replace the certificate then you will receive certificate errors which prevent creating your objects.
 
 `vars/controller_credential_types.yml`:
 
@@ -91,7 +65,7 @@ Variables
 
 `vars/controller_job_templates.yml`:
 
-    controller_job_templates
+    controller_templates
 
         Dictionary of job templates to create.  One example exists that will need to be filled in.  You can also copy / paste the example for additional job templates.
 
@@ -125,8 +99,6 @@ Variables
 
         Dictionary of organizations to create.  One example exists that will need to be filled in.  You can also copy / paste the example for additional organizations.
 
-    This vars file has the organization defined without the Galaxy / Automation Hub credential.
-
 `vars/controller_projects.yml`:
 
     controller_projects
@@ -155,7 +127,7 @@ Variables
 
     Unless otherwise instructed, please refrain from adding local users.  Users should be added to the organization via LDAP mapping.
 
-    controller_users
+    controller_user_accounts
 
         Dictionary of local users to create.  One example exists that will need to be filled in.  You can also copy / paste the example for additional users.
 
@@ -165,9 +137,9 @@ Variables
 
     controller_vars
 
-        If using ansible-playbook, populate `controller_vars` your Tower or Controller hostname (or IP adress), username, and password.  The variables are used for your connection to Tower / Controller to create the objects you define in these vars files.
+        If using ansible-playbook, populate `controller_vars` your Controller hostname (or IP adress), username, and password.  The variables are used for your connection to Controller to create the objects you define in these vars files.
 
-        If you are going to create a Job Template in Tower / Controller to run the `controller_config.yml` playbook then do not populate this file and instead use either a Survey or extra_vars with your job tmeplate.
+        If you are going to create a Job Template in Controller to run the `controller_config.yml` playbook then do not populate this file and instead use either a Survey or extra_vars with your job tmeplate.
 
 `vars/controller_workflows.yml`:
 
@@ -183,7 +155,7 @@ Variables
 
 `vars/controller_notification_templates.yml`:
 
-    controller_notification_templates
+    controller_notifications
 
         Dictionary of notification templates to create.  One example exists that will need to be filled in.  You can also copy / paste the example for additional notification templates.
 
@@ -202,28 +174,23 @@ Variables
 Dependencies
 ------------
 
-A combination of `ansible.controller` or `ansible.tower` or `awx.awx` and
-`controller_configuration` collections.
+A combination of `ansible.controller` and `controller_configuration` collections.
 
 Playbook Execution
 ----------------
 
-You can run this playbook from ansible cli or as a Job Template in Tower / Controller.
+You can run this playbook from ansible cli or as a Job Template in Controller.
 
-From the command line to define all objects:
+From the command line:
 
-    ansible-playbook controller_config.yml --tags alltags
-
-    or just to create new job templates:
-
-    ansible-playbook controller_config.yaml --tags jobtemplates
+    `ansible-playbook controller_config.yml`
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Tony Reveal

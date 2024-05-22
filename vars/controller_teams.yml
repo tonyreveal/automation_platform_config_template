@@ -2,9 +2,9 @@
 # for documentation and additional parameter information
 
 ---
-controller_teams:
-  - name: ""
-    description: ""
-    organization: "{{ which_org }}"
-    state: "{{ absent_present }}"
+controller_teams: []
+  # - name: ""
+  #   description: ""
+  #   organization: "{{ which_org }}"
+  #   state: "{{ absent_present }}"
 ...

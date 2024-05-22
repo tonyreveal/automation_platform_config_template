@@ -1,27 +1,3 @@
-# Available tags
-#   - never
-#   - alltags
-#   - settings
-#   - credtypes
-#   - orgs
-#   - users
-#   - teams
-#   - credentials
-#   - projects
-#   - labels
-#   - inventory
-#   - inventorysources
-#   - hosts
-#   - groups
-#   - jobtemplates
-#   - workflows
-#   - schedules
-#   - ees
-#   - instancegroups
-#   - notifications
-#   - roles
-
-
 ---
 - name: Playbook to configure a Controller cluster
   hosts: localhost
@@ -39,148 +15,118 @@
     CONTROLLER_VERIFY_SSL: false
 
   pre_tasks:
-    - name: "Include Vars"
-      include_vars: "vars/controller_vars.yml"
+    - name: "Include variables from directory"
+      ansible.builtin.include_vars:
+        dir: "vars/"
+        extensions:
+          - 'yml'
+          - 'yaml'
+          - 'json'
 
   tasks:
     - name: "Include task for managing LDAP settings"
-      include_tasks: tasks/manage_controller_settings.yml
-      tags:
-        - never
-        - alltags
-        - settings
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.settings
+      when: controller_settings | length is not match('0')
 
     - name: "Include task for managing instance groups"
-      include_tasks: tasks/manage_instance_groups.yml
-      tags:
-        - never
-        - alltags
-        - instancegroups
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.instance_groups
+      when: controller_instance_groups | length is not match('0')
 
     - name: "Include task for managing credential types"
-      include_tasks: tasks/manage_credential_types.yml
-      tags:
-        - never
-        - alltags
-        - credtypes
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.credential_types
+      when: controller_credential_types | length is not match('0')
 
     - name: "Include task for managing organizations"
-      include_tasks: tasks/manage_organizations.yml
-      tags:
-        - never
-        - alltags
-        - orgs
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.organizations
+      vars:
+        assign_galaxy_credentials_to_org: false
+      when: controller_organizations | length is not match('0')
 
     - name: "Include task for managing users"
-      include_tasks: tasks/manage_users.yml
-      tags:
-        - never
-        - alltags
-        - users
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.users
+      when: controller_user_accounts | length is not match('0')
 
     - name: "Include task for managing teams"
-      include_tasks: tasks/manage_teams.yml
-      tags:
-        - never
-        - alltags
-        - teams
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.teams
+      when: controller_teams | length is not match('0')
 
     - name: "Include task for managing credentials"
-      include_tasks: tasks/manage_credentials.yml
-      tags:
-        - never
-        - alltags
-        - credentials
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.credentials
+      when: controller_credentials | length is not match('0')
 
     # Add Orgs a second time to associate the Galaxy / Automation Hub credentials with the Org for project sync
-    - name: "Include task for managing organizations"
-      include_tasks: tasks/manage_organizations.yml
-      tags:
-        - never
-        - alltags
-        - orgs
+    - name: "Include task for managing organizations to associate Hub credentials"
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.organizations
+      vars:
+        assign_galaxy_credentials_to_org: true
+      when: controller_organizations | length is not match('0')
 
     - name: "Include task for manging execution environments"
-      include_tasks: tasks/manage_ees.yml
-      tags:
-        - never
-        - alltags
-        - ees
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.execution_environments
+      when: controller_execution_environments | length is not match('0')
 
     - name: "Include task for managing projects"
-      include_tasks: tasks/manage_projects.yml
-      tags:
-        - never
-        - alltags
-        - projects
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.projects
+      when: controller_projects | length is not match('0')
 
     - name: "Include task for managing labels"
-      include_tasks: tasks/manage_labels.yml
-      tags:
-        - never
-        - alltags
-        - labels
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.labels
+      when: controller_labels | length is not match('0')
 
     - name: "Include task for managing inventories"
-      include_tasks: tasks/manage_inventories.yml
-      tags:
-        - never
-        - alltags
-        - inventory
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.inventories
+      when: controller_inventories | length is not match('0')
 
-    - name: "Include task for managing inventories"
-      include_tasks: tasks/manage_inventory_sources.yml
-      tags:
-        - never
-        - alltags
-        - inventorysources
+    - name: "Include task for managing inventory sources"
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.inventory_sources
+      when: controller_inventory_sources | length is not match('0')
 
     - name: "Include task for managing hosts"
-      include_tasks: tasks/manage_hosts.yml
-      tags:
-        - never
-        - alltags
-        - hosts
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.hosts
+      when: controller_hosts | length is not match('0')
 
     - name: "Include task for managing groups"
-      include_tasks: tasks/manage_groups.yml
-      tags:
-        - never
-        - alltags
-        - groups
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.groups
+      when: controller_groups | length is not match('0')
 
     - name: "Include task for managing notification templates"
-      include_tasks: tasks/manage_notification_templates.yml
-      tags:
-        - never
-        - alltags
-        - notifications
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.notification_templates
+      when: controller_notifications | length is not match('0')
 
     - name: "Include task for managing job templates"
-      include_tasks: tasks/manage_job_templates.yml
-      tags:
-        - never
-        - alltags
-        - jobtemplates
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.job_templates
+      when: controller_templates | length is not match('0')
 
     - name: "Include task for managing workflow templates"
-      include_tasks: tasks/manage_workflow_templates.yml
-      tags:
-        - never
-        - alltags
-        - workflows
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.workflow_job_templates
+      when: controller_workflows | length is not match('0')
 
     - name: "Include task for managing schedules"
-      include_tasks: tasks/manage_schedules.yml
-      tags:
-        - never
-        - alltags
-        - schedules
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.schedules
+      when: controller_schedules | length is not match('0')
 
     - name: "Include task for managing roles"
-      include_tasks: tasks/manage_roles.yml
-      tags:
-        - never
-        - alltags
-        - roles
+      ansible.builtin.include_role:
+        name: infra.controller_configuration.roles
+      when: controller_roles | length is not match('0')
 ...
+

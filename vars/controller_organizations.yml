@@ -2,7 +2,10 @@
 # for documentation and additional parameter information
 
 ---
-controller_organizations:
-  - name: ""
-    state: "{{ absent_present }}"
+controller_organizations: []
+  # - name: ""
+  #   galaxy_credentials:
+  #     - "RH Automation Hub {{ which_org}}"
+  #     - "Ansible Galaxy"
+  #   state: "{{ absent_present }}"
 ...

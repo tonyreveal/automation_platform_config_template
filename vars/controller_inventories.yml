@@ -2,8 +2,8 @@
 # for documentation and additional parameter information
 
 ---
-controller_inventories:
-  - name: ""
-    state: "{{ absent_present }}"
-    organization: ""
+controller_inventories: []
+  # - name: ""
+  #   state: "{{ absent_present }}"
+  #   organization: ""
 ...

@@ -2,8 +2,8 @@
 # for documentation and additional parameter information
 
 ---
-controller_labels:
-  - name: ""
-    organization: ""
-    state: "{{ absent_present }}"
+controller_labels: []
+  # - name: ""
+  #   organization: ""
+  #   state: "{{ absent_present }}"
 ...

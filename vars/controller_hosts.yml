@@ -2,28 +2,28 @@
 # for documentation and additional parameter information
 
 ---
-controller_hosts:
-  - name: ""
-    new_name: ""
-    inventory: "{{ which_inventory }}"
-    enabled: true
-    state: "{{ absent_present }}"
+controller_hosts: []
+  # - name: ""
+  #   new_name: ""
+  #   inventory: "{{ which_inventory }}"
+  #   enabled: true
+  #   state: "{{ absent_present }}"
 
-  - name: ""
-    new_name: ""
-    inventory: "{{ which_inventory }}"
-    enabled: true
-    state: "{{ absent_present }}"
+  # - name: ""
+  #   new_name: ""
+  #   inventory: "{{ which_inventory }}"
+  #   enabled: true
+  #   state: "{{ absent_present }}"
 
-  - name: ""
-    new_name: ""
-    inventory: "{{ which_inventory }}"
-    enabled: true
-    state: "{{ absent_present }}"
+  # - name: ""
+  #   new_name: ""
+  #   inventory: "{{ which_inventory }}"
+  #   enabled: true
+  #   state: "{{ absent_present }}"
 
-  - name: ""
-    new_name: ""
-    inventory: "{{ which_inventory }}"
-    enabled: true
-    state: "{{ absent_present }}"
+  # - name: ""
+  #   new_name: ""
+  #   inventory: "{{ which_inventory }}"
+  #   enabled: true
+  #   state: "{{ absent_present }}"
 ...

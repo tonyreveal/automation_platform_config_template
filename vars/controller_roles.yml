@@ -5,12 +5,12 @@
 # ENSURE UNDERSTANDING
 
 ---
-controller_roles:
-  - user: ""
-    role: ""
-    state: "{{ absent_present }}"
+controller_roles: []
+  # - user: ""
+  #   role: ""
+  #   state: "{{ absent_present }}"
 
-  - team: ""
-    role: ""
-    state: "{{ absent_present }} "
+  # - team: ""
+  #   role: ""
+  #   state: "{{ absent_present }} "
 ...

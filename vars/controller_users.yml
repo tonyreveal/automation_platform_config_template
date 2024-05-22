@@ -2,12 +2,12 @@
 # for documentation and additional parameter information
 
 ---
-controller_user_accounts:
-  - username: ""
-    password: ""
-    email: ""
-    first_name: ""
-    last_name: ""
-    is_superuser: false
-    state: "{{ absent_present }}"
+controller_user_accounts: []
+  # - username: ""
+  #   password: ""
+  #   email: ""
+  #   first_name: ""
+  #   last_name: ""
+  #   is_superuser: false
+  #   state: "{{ absent_present }}"
 ...
