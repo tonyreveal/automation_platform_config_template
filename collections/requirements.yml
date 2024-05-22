@@ -1,6 +1,6 @@
 ---
 collections:
   - name: ansible.controller
-  - name: redhat_cop.controller_configuration
-  - name: galaxy.galaxy
+  - name: infra.controller_configuration
+  - name: infra.ah_confifguraiton
 ...
