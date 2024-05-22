@@ -17,7 +17,7 @@
   pre_tasks:
     - name: "Include variables from directory"
       ansible.builtin.include_vars:
-        dir: "vars/"
+        dir: "controller_vars/"
         extensions:
           - 'yml'
           - 'yaml'
