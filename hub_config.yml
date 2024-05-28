@@ -8,8 +8,7 @@
     - infra.ah_configuration
 
   vars:
-    absent_present: "present"
-    which_org: ""
+    absent_present: "{{ state | default('present') }}"
 
   environment:
     CONTROLLER_VERIFY_SSL: false
