@@ -14,98 +14,46 @@
     CONTROLLER_VERIFY_SSL: false
 
   pre_tasks:
-    - name: "Include variables from directory"
+    - name: "Include AAP host and credential info from vault"
       ansible.builtin.include_vars:
-        dir: "hub_vars/"
-        extensions:
-          - 'yml'
-          - 'yaml'
-          - 'json'
+        file: "controller_vars/controller_vars.yml"
+
+    - name: Get AAP version from 2.4 or older API
+      ansible.builtin.uri:
+        url: "https://{{ controller_host }}/api/v2/config/"
+        force_basic_auth: true
+        method: GET
+        return_content: true
+        url_password: "{{ controller_password }}"
+        url_username: "{{ controller_username }}"
+        validate_certs: "{{ lookup('env', 'CONTROLLER_VERIFY_SSL') | bool }}"
+      register: api_version
+      ignore_errors: true
+
+    - name: Get AAP version from 2.5 or newer API
+      ansible.builtin.uri:
+        url: "https://{{ controller_host }}/api/controller/v2/config/"
+        force_basic_auth: true
+        method: GET
+        return_content: true
+        url_password: "{{ controller_password }}"
+        url_username: "{{ controller_username }}"
+        validate_certs: "{{ lookup('env', 'CONTROLLER_VERIFY_SSL') | bool }}"
+      register: api_version
+      ignore_errors: true
+
+    - name: Set fact of AAP version returned from API
+      ansible.builtin.set_fact:
+        aap_version: "{{ api_version['json']['version'] }}"
 
   tasks:
-    - name: "Include task for managing collections"
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.collection
-      when: ah_collections | length is not match('0')
+    - name: Include tasks for Pre-AAP 2.5
+      ansible.builtin.include_tasks:
+        file: pre_aap25.yml
+      when: aap_version < aap25_version
 
-    - name: 'Include task for managing collection remotes'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.collection_remote
-      when: ah_collection_remotes | length is not match('0')
-
-    - name: 'Include task for managing collection repositories'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.collection_repository
-      when: ah_collection_repositories | length is not match('0')
-
-    - name: 'Include task for managing collection repository sync'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.collection_repository_sync
-      when:
-        - ah_collection_repositories | length is not match('0')
-        - item['wait'] is defined
-      loop: "{{ ah_collection_repositories }}"
-
-    - name: 'Include task for managing execution environment container images'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.ee_image
-      when: ah_ee_images | length is not match('0')
-
-    - name: 'Include task for managing execution environment registries'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.ee_registry
-      when: ah_ee_registries | length is not match('0')
-
-    - name: 'Include task for indexing execution environment registries'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.ee_registry_index
-      when: ah_ee_registries | length is not match('0')
-
-    - name: 'Include task for syncing execution environment registries'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.ee_registry_sync
-      when: ah_ee_registries | length is not match('0')
-
-    - name: 'Include task for managing execution environment repositories'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.ee_repository
-      when: ah_ee_repositories | length is not match('0')
-
-    - name: 'Include task for syncing execution environment repositories'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.ee_repository_sync
-      when:
-        - ah_ee_repositories | length is not match('0')
-        - item['wait'] is defined
-      loop: "{{ ah_ee_repositories }}"
-
-    - name: 'Include task for managing Automation Hub Groups'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.groups
-      when: ah_groups | length is not match('0')
-
-    - name: 'Include task for managing Automation Hub group Roles'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.group_roles
-      when: ah_group_roles | length is not match('0')
-
-    - name: 'Include task for managing namespaces'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.namespace
-      when: ah_namespaces | length is not match('0')
-
-    - name: 'Include task for publishing collections'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.publish
-      when: ah_collection_list | length is not match('0')
-
-    - name: 'Include task for managing Automation Hub Roles'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.role
-      when: ah_roles | length is not match('0')
-
-    - name: 'Include task for managing Automation Hub Users'
-      ansible.builtin.include_role:
-        name: infra.ah_configuration.user
-      when: ah_users | length is not match('0')
+    - name: Include tasks for AAP 2.5 and newer
+      ansible.builtin.include_tasks:
+        file: aap25_and_newer.yml
+      when: aap_version >= aap25_version
 ...

@@ -1,0 +1,5 @@
+---
+- name: Display message
+  ansible.builtin.debug:
+    msg: "Detected AAP 2.5 or newer"
+...

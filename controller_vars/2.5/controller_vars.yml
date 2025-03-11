@@ -1,0 +1,9 @@
+# If populating this file with valid credentials, 
+# then this file should be vaulted before committing to your repository
+
+---
+controller_hostname: ''
+controller_password: ''
+controller_username: ''
+controller_validate_certs: false
+...
